@@ -10,13 +10,14 @@
 
   <ItemGroup>
     <Protobuf Include="Protos\Financial.proto" GrpcServices="Server" />
-    <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.0" />
     <PackageReference Include="Grpc.AspNetCore" Version="2.34.0" />
   </ItemGroup>
-	<ItemGroup>
-		<Folder Include="Services\" />
-	</ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Financial.Domain\Financial.Domain.csproj" />
+  </ItemGroup>
 </Project>

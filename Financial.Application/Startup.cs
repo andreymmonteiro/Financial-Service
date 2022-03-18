@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Financial.Aplpication.Mapper.ConfigureAutoMapper.Interface;
+using Financial.Application.Mapper.ConfigureAutoMapper;
+using Financial.Application.Services;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +16,7 @@ namespace Financial.Application
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddGrpc();
+            services.AddScoped<IMapperService, AutoMapperFixture>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -22,12 +26,11 @@ namespace Financial.Application
             {
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
-                //endpoints.MapGrpcService<GreeterService>();
+                endpoints.MapGrpcService<FinancialService>();
 
                 endpoints.MapGet("/", async context =>
                 {

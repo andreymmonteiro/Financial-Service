@@ -4,16 +4,23 @@ option csharp_namespace = "Financial.Application.Protos";
 
 package Financial;
 
-message FinanceAccountsDto
+message FinanceAccountsProtoDto
 {
 	string Id = 1;
-	int32 Type = 2;
+	int32 FinanceAccountType = 2;
 }
 
 message FinanceAccountsSingleRequest
 {
 	string Id= 1;
-	int32 Type = 2;
+	int32 FinanceAccountType = 2;
+}
+
+message FinanceAccountsCreateRequest
+{
+	string PaymentTermsId = 1;
+	string FinanceAccountItemId = 2;
+	int32 FinanceAccountType = 3;
 }
 
 message FinanceAccountsRequest{
@@ -22,8 +29,10 @@ message FinanceAccountsRequest{
 
 service Finance{
 	
-	rpc GetFinanceAccounts(FinanceAccountsSingleRequest) returns(FinanceAccountsDto){};
+	rpc GetFinanceAccounts(FinanceAccountsSingleRequest) returns(FinanceAccountsProtoDto){};
 
-	rpc GetAllFinanceAccounts(FinanceAccountsRequest)returns(FinanceAccountsDto){};
+	rpc GetAllFinanceAccounts(FinanceAccountsRequest)returns(FinanceAccountsProtoDto){};
+
+	rpc CreateFinanceAccounts(FinanceAccountsCreateRequest)returns(FinanceAccountsProtoDto){};
 
 }
