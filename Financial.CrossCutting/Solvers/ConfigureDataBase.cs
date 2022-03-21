@@ -5,16 +5,16 @@ using System.Collections.Generic;
 
 namespace Financial.CrossCutting.Solvers
 {
-    public abstract class ConfigureDataBase
+    public static class ConfigureDataBase
     {
-        
-        protected ConfigureDataBase(IMySqlDataBase _dataBase, DataBaseType type, IServiceCollection services)
+        public static void IncludeDataBase(this IServiceCollection _services, DataBaseType type, string connetionString)
         {
-            Dictionary<DataBaseType, IBaseDataBase> _db = new Dictionary<DataBaseType, IBaseDataBase>() 
+            Dictionary<DataBaseType, BaseDataBase> _db = new ()
             {
-                { DataBaseType.mySql, _dataBase }
+                { DataBaseType.mySql, new MySqlDataBase(connetionString) }
             };
-            _db[type].IncludeDataBase(services);
+
+            _db[type].IncludeDataBase(_services);
         }
     }
 }

@@ -5,11 +5,16 @@ using System;
 
 namespace Financial.CrossCutting.Solvers.DataBase
 {
-    public class MySqlDataBase : IMySqlDataBase
+    public class MySqlDataBase : BaseDataBase
     {
-        public static string MY_SQL_CONNECTION { get; set; }
+        public string MY_SQL_CONNECTION { get; set; }
 
-        public void IncludeDataBase(IServiceCollection service)
+        public MySqlDataBase(string mY_SQL_CONNECTION)
+        {
+            MY_SQL_CONNECTION = mY_SQL_CONNECTION;
+        }
+
+        public override void IncludeDataBase(IServiceCollection service)
         {
             service.AddDbContext<MyContext>(options => options.UseMySql(MY_SQL_CONNECTION, ServerVersion.Parse("5.7-mysql"),
                             options => options.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null)));

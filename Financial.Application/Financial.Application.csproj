@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Financial.CrossCutting\Financial.CrossCutting.csproj" />
     <ProjectReference Include="..\Financial.Domain\Financial.Domain.csproj" />
   </ItemGroup>
 </Project>
