@@ -3,14 +3,16 @@ using System;
 using Financial.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Financial.Data.Migrations
 {
     [DbContext(typeof(MyContext))]
-    partial class MyContextModelSnapshot : ModelSnapshot
+    [Migration("20220321234922_financial")]
+    partial class financial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -120,102 +122,6 @@ namespace Financial.Data.Migrations
                     b.ToTable("FinanceAccountsPaymentItems");
                 });
 
-            modelBuilder.Entity("Financial.Domain.Entities.PaymentTerms.PaymentTermsEntity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("CompanyId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<DateTime>("CreateAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("ForceExpiration")
-                        .HasMaxLength(10)
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("UpdateAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PaymentTerms");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("659fea76-dc49-44eb-a907-cb5820f78762"),
-                            CompanyId = new Guid("8dc5eb0c-ed68-4b1e-b9fe-77e82efb1f31"),
-                            CreateAt = new DateTime(2022, 3, 21, 21, 3, 42, 64, DateTimeKind.Local).AddTicks(6041),
-                            Description = "Á vista",
-                            ForceExpiration = 0,
-                            UpdateAt = new DateTime(2022, 3, 21, 21, 3, 42, 65, DateTimeKind.Local).AddTicks(3980)
-                        },
-                        new
-                        {
-                            Id = new Guid("f3536b08-682b-4063-831f-68d9486517c1"),
-                            CompanyId = new Guid("8dc5eb0c-ed68-4b1e-b9fe-77e82efb1f31"),
-                            CreateAt = new DateTime(2022, 3, 21, 21, 3, 42, 66, DateTimeKind.Local).AddTicks(4171),
-                            Description = "30 dias",
-                            ForceExpiration = 0,
-                            UpdateAt = new DateTime(2022, 3, 21, 21, 3, 42, 66, DateTimeKind.Local).AddTicks(4179)
-                        });
-                });
-
-            modelBuilder.Entity("Financial.Domain.Entities.PaymentTerms.PaymentTermsItemsEntity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<decimal>("Addition")
-                        .HasColumnType("decimal(65,30)");
-
-                    b.Property<Guid>("CompanyId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<DateTime>("CreateAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("Days")
-                        .HasMaxLength(10)
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Discount")
-                        .HasColumnType("decimal(65,30)");
-
-                    b.Property<Guid>("PaymentTermsId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<DateTime>("UpdateAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PaymentTermsId");
-
-                    b.ToTable("PaymentTermsItems");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("b836bec6-79fc-4926-bd76-889b7c090977"),
-                            Addition = 0m,
-                            CompanyId = new Guid("8dc5eb0c-ed68-4b1e-b9fe-77e82efb1f31"),
-                            CreateAt = new DateTime(2022, 3, 21, 21, 3, 42, 66, DateTimeKind.Local).AddTicks(4608),
-                            Days = 30,
-                            Discount = 0m,
-                            PaymentTermsId = new Guid("f3536b08-682b-4063-831f-68d9486517c1"),
-                            UpdateAt = new DateTime(2022, 3, 21, 21, 3, 42, 66, DateTimeKind.Local).AddTicks(4613)
-                        });
-                });
-
             modelBuilder.Entity("Financial.Domain.Entities.FinanceAccounts.FinanceAccountsItemsEntity", b =>
                 {
                     b.HasOne("Financial.Domain.Entities.FinanceAccounts.FinanceAccountsEntity", "FinanceAccount")
@@ -238,17 +144,6 @@ namespace Financial.Data.Migrations
                     b.Navigation("FinanceAccountsItems");
                 });
 
-            modelBuilder.Entity("Financial.Domain.Entities.PaymentTerms.PaymentTermsItemsEntity", b =>
-                {
-                    b.HasOne("Financial.Domain.Entities.PaymentTerms.PaymentTermsEntity", "PaymentTerms")
-                        .WithMany("PaymentTermsItems")
-                        .HasForeignKey("PaymentTermsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("PaymentTerms");
-                });
-
             modelBuilder.Entity("Financial.Domain.Entities.FinanceAccounts.FinanceAccountsEntity", b =>
                 {
                     b.Navigation("FinanceAccountsItems");
@@ -257,11 +152,6 @@ namespace Financial.Data.Migrations
             modelBuilder.Entity("Financial.Domain.Entities.FinanceAccounts.FinanceAccountsItemsEntity", b =>
                 {
                     b.Navigation("PaymentItems");
-                });
-
-            modelBuilder.Entity("Financial.Domain.Entities.PaymentTerms.PaymentTermsEntity", b =>
-                {
-                    b.Navigation("PaymentTermsItems");
                 });
 #pragma warning restore 612, 618
         }

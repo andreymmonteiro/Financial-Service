@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32127.271
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Financial.Domain", "Financial.Domain\Financial.Domain.csproj", "{D286264B-4887-47A1-B21C-B41424FDF282}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Financial.Domain", "Financial.Domain\Financial.Domain.csproj", "{D286264B-4887-47A1-B21C-B41424FDF282}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Financial.Data", "Financial.Data\Financial.Data.csproj", "{F1573822-3679-4298-AAEE-F3AD7FE76A59}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Financial.Data", "Financial.Data\Financial.Data.csproj", "{F1573822-3679-4298-AAEE-F3AD7FE76A59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Financial.Service", "Financial.Service\Financial.Service.csproj", "{CFFB2907-B9FB-4E15-A42D-8DDBDA828BF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Financial.Service", "Financial.Service\Financial.Service.csproj", "{CFFB2907-B9FB-4E15-A42D-8DDBDA828BF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Financial.CrossCutting", "Financial.CrossCutting\Financial.CrossCutting.csproj", "{1FE61C52-8A30-4947-9252-A3DB6C14FA88}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Financial.CrossCutting", "Financial.CrossCutting\Financial.CrossCutting.csproj", "{1FE61C52-8A30-4947-9252-A3DB6C14FA88}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Financial.Application", "Financial.Application\Financial.Application.csproj", "{82CC3337-E835-4E45-B480-09886234200C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Financial.Application", "Financial.Application\Financial.Application.csproj", "{82CC3337-E835-4E45-B480-09886234200C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

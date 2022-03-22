@@ -8,8 +8,9 @@ namespace Financial.Application.Mapper
     {
         public EntityToDto()
         {
-            CreateMap<FinanceAccount, FinanceAccountsProtoDto>().ReverseMap();
-            CreateMap<FinanceAccount, FinanceAccountsCreateRequest>().ReverseMap();
+            CreateMap<FinanceAccountsEntity, FinanceAccountsProtoDto>().ReverseMap();
+            CreateMap<FinanceAccountsEntity, FinanceAccountsCreateRequest>().ReverseMap();
+            CreateMap<FinanceAccountsEntity, FinanceAccountsUpdateRequest>().ReverseMap();
         }
     }
 }

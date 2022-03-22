@@ -21,10 +21,22 @@ message FinanceAccountsCreateRequest
 	string PaymentTermsId = 1;
 	string FinanceAccountItemId = 2;
 	int32 FinanceAccountType = 3;
+	string PersonId = 4;
+}
+message FinanceAccountsUpdateRequest
+{
+	string PaymentTermsId = 1;
+	string FinanceAccountItemId = 2;
+	int32 FinanceAccountType = 3;
+	string PersonId = 4;
 }
 
 message FinanceAccountsRequest{
 
+}
+
+message FinanceAccountsDeleteResponse{
+	string Result = 1; 
 }
 
 service Finance{
@@ -34,5 +46,9 @@ service Finance{
 	rpc GetAllFinanceAccounts(FinanceAccountsRequest)returns(FinanceAccountsProtoDto){};
 
 	rpc CreateFinanceAccounts(FinanceAccountsCreateRequest)returns(FinanceAccountsProtoDto){};
+
+	rpc UpdateFinancAccounts(FinanceAccountsUpdateRequest)returns(FinanceAccountsProtoDto){};
+
+	rpc DeleteFinanceAccounts(FinanceAccountsSingleRequest) returns(FinanceAccountsDeleteResponse){};
 
 }

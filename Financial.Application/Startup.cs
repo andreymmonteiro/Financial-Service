@@ -15,7 +15,7 @@ namespace Financial.Application
     public class Startup
     {
         //Will be create a json config to define
-        private const string DATA_BASE_CONNECTION = "DataBase:MySql:ConnectionString";
+        private const string MY_SQL_DATA_BASE_CONNECTION = "DataBase:MySql:ConnectionString";
         private readonly IConfiguration Configuration;
 
         public Startup(IConfiguration configuration)
@@ -32,10 +32,11 @@ namespace Financial.Application
 
             ConfigureRepositories.DependencyInjection(services);
 
-            string mySql = Configuration.GetSection(DATA_BASE_CONNECTION).Value.ToString();
-           
-            services.IncludeDataBase(DataBaseType.mySql, mySql);
-
+            string mySql = Configuration.GetSection(MY_SQL_DATA_BASE_CONNECTION).Value.ToString();
+            if (!string.IsNullOrWhiteSpace(mySql)) 
+            {
+                services.IncludeDataBase(DataBaseType.mySql, mySql);
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
