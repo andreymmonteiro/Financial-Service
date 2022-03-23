@@ -3,19 +3,21 @@ using System;
 using Financial.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Financial.Data.Migrations
 {
     [DbContext(typeof(MyContext))]
-    partial class MyContextModelSnapshot : ModelSnapshot
+    [Migration("20220323004929_finance")]
+    partial class finance
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
-                .HasAnnotation("ProductVersion", "5.0.11");
+                .HasAnnotation("ProductVersion", "5.0.15");
 
             modelBuilder.Entity("Financial.Domain.Entities.FinanceAccounts.FinanceAccountsEntity", b =>
                 {
@@ -28,6 +30,15 @@ namespace Financial.Data.Migrations
 
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<int>("FinanceAccountType")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("PaymentTermsId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("PersonId")
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime>("UpdateAt")
                         .HasColumnType("datetime(6)");
@@ -141,21 +152,21 @@ namespace Financial.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ee811013-f73a-4ebd-b1c0-e63d0b9eeb24"),
-                            CompanyId = new Guid("aa889dfd-e85c-4e0d-90cd-34e462afa4f1"),
-                            CreateAt = new DateTime(2022, 3, 22, 22, 45, 34, 551, DateTimeKind.Local).AddTicks(935),
+                            Id = new Guid("b57b2ff9-b04f-4aa2-aa52-d0d57d9cd4bc"),
+                            CompanyId = new Guid("6257e628-ad1c-4402-b8d6-7e234c276794"),
+                            CreateAt = new DateTime(2022, 3, 22, 21, 49, 29, 265, DateTimeKind.Local).AddTicks(7275),
                             Description = "Á vista",
                             ForceExpiration = 0,
-                            UpdateAt = new DateTime(2022, 3, 22, 22, 45, 34, 552, DateTimeKind.Local).AddTicks(5554)
+                            UpdateAt = new DateTime(2022, 3, 22, 21, 49, 29, 266, DateTimeKind.Local).AddTicks(5008)
                         },
                         new
                         {
-                            Id = new Guid("39b595a5-f64e-4b2a-9775-f2ecb80d7ecd"),
-                            CompanyId = new Guid("aa889dfd-e85c-4e0d-90cd-34e462afa4f1"),
-                            CreateAt = new DateTime(2022, 3, 22, 22, 45, 34, 553, DateTimeKind.Local).AddTicks(4974),
+                            Id = new Guid("e90cfbaf-e4c3-4c59-b16d-b113c056acb5"),
+                            CompanyId = new Guid("6257e628-ad1c-4402-b8d6-7e234c276794"),
+                            CreateAt = new DateTime(2022, 3, 22, 21, 49, 29, 267, DateTimeKind.Local).AddTicks(4866),
                             Description = "30 dias",
                             ForceExpiration = 0,
-                            UpdateAt = new DateTime(2022, 3, 22, 22, 45, 34, 553, DateTimeKind.Local).AddTicks(4981)
+                            UpdateAt = new DateTime(2022, 3, 22, 21, 49, 29, 267, DateTimeKind.Local).AddTicks(4874)
                         });
                 });
 
@@ -196,21 +207,21 @@ namespace Financial.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("90eb60cc-c92a-4c7b-b82b-6aa3a19e419d"),
+                            Id = new Guid("eda34963-7132-4819-a900-552e202a8e03"),
                             Addition = 0m,
-                            CompanyId = new Guid("aa889dfd-e85c-4e0d-90cd-34e462afa4f1"),
-                            CreateAt = new DateTime(2022, 3, 22, 22, 45, 34, 553, DateTimeKind.Local).AddTicks(5421),
+                            CompanyId = new Guid("6257e628-ad1c-4402-b8d6-7e234c276794"),
+                            CreateAt = new DateTime(2022, 3, 22, 21, 49, 29, 267, DateTimeKind.Local).AddTicks(5289),
                             Days = 30,
                             Discount = 0m,
-                            PaymentTermsId = new Guid("39b595a5-f64e-4b2a-9775-f2ecb80d7ecd"),
-                            UpdateAt = new DateTime(2022, 3, 22, 22, 45, 34, 553, DateTimeKind.Local).AddTicks(5425)
+                            PaymentTermsId = new Guid("e90cfbaf-e4c3-4c59-b16d-b113c056acb5"),
+                            UpdateAt = new DateTime(2022, 3, 22, 21, 49, 29, 267, DateTimeKind.Local).AddTicks(5294)
                         });
                 });
 
             modelBuilder.Entity("Financial.Domain.Entities.FinanceAccounts.FinanceAccountsItemsEntity", b =>
                 {
                     b.HasOne("Financial.Domain.Entities.FinanceAccounts.FinanceAccountsEntity", "FinanceAccount")
-                        .WithMany()
+                        .WithMany("FinanceAccountsItems")
                         .HasForeignKey("FinanceAccountId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -238,6 +249,11 @@ namespace Financial.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("PaymentTerms");
+                });
+
+            modelBuilder.Entity("Financial.Domain.Entities.FinanceAccounts.FinanceAccountsEntity", b =>
+                {
+                    b.Navigation("FinanceAccountsItems");
                 });
 
             modelBuilder.Entity("Financial.Domain.Entities.FinanceAccounts.FinanceAccountsItemsEntity", b =>

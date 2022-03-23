@@ -3,10 +3,10 @@ using Financial.Aplpication.Mapper.ConfigureAutoMapper.Interface;
 
 namespace Financial.Application.Mapper.ConfigureAutoMapper
 {
-    public class AutoMapperFixture : IMapperService
+    public class AutoMapperFixtureProtoService : IMapperProtoService
     {
 
-        public AutoMapperFixture() 
+        public AutoMapperFixtureProtoService() 
         {
             GetMapper();
         }

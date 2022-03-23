@@ -4,13 +4,23 @@ using Financial.Domain.Entities.FinanceAccounts;
 using Financial.Domain.Entities.PaymentTerms;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Financial.Data.Context
 {
     public class MyContext : DbContext
     {
+        public DbSet<FinanceAccountsEntity> FinanceAccounts { get; set; }
+        
+        public DbSet<FinanceAccountsItemsEntity> FinanceAccountsItems { get; set; }
 
-        public MyContext(DbContextOptions options) : base(options)
+        public DbSet<FinanceAccountsPaymentItemsEntity> FinanceAccountsPaymentItems { get; set; }
+
+        public DbSet<PaymentTermsEntity> PaymentTerms { get; set; }
+
+        public DbSet<PaymentTermsItemsEntity> PaymentTermsItems { get; set; }
+
+        public MyContext([NotNullAttribute] DbContextOptions<MyContext> options) : base(options)
         {
 
         }

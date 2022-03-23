@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
+using Financial.Aplpication.Mapper.ConfigureAutoMapper.Interface;
 using Financial.Application.Protos;
-using Financial.Domain.Entities.FinanceAccounts;
-using Financial.Domain.Interfaces;
+using Financial.Domain.Dtos.FinanceAccounts;
+using Financial.Domain.Services;
 using Grpc.Core;
 using System;
 using System.Threading.Tasks;
@@ -11,45 +12,44 @@ namespace Financial.Application.Services
 {
     public class FinancialService : FinanceBase
     {
-        private readonly IRepository<FinanceAccountsEntity> _repository;
+        private readonly IFinanceAccountsService _service;
         private readonly IMapper _mapper;
         private const string SUCCESS = "Success";
         private const string ERROR = "Error";
 
-        public FinancialService(IRepository<FinanceAccountsEntity> repository, IMapper mapper)
+        public FinancialService(IFinanceAccountsService service, IMapperProtoService mapper)
         {
-            _repository = repository;
-            _mapper = mapper;
+            _service = service;
+            _mapper = mapper.GetMapper();
         }
 
         public override async Task<FinanceAccountsProtoDto> GetAllFinanceAccounts(FinanceAccountsRequest request, ServerCallContext context)
         {
-            var financeAccountsEntity = await _repository.SelectAsync();
+            var financeAccountsEntity = await _service.GetAllAsync();
             return _mapper.Map<FinanceAccountsProtoDto>(financeAccountsEntity);
         }
 
         public override async Task<FinanceAccountsProtoDto> GetFinanceAccounts(FinanceAccountsSingleRequest request, ServerCallContext context)
         {
-            var financeAccountsEntity = await _repository.SelectAsync(new Guid(request.Id));
+            var financeAccountsEntity = await _service.GetAsync(Guid.Parse(request.Id));
             return _mapper.Map<FinanceAccountsProtoDto>(financeAccountsEntity);
         }
 
         public override async Task<FinanceAccountsProtoDto> CreateFinanceAccounts(FinanceAccountsCreateRequest request, ServerCallContext context)
         {
-            var financeAccountEntity = await _repository.InsertASync(_mapper.Map<FinanceAccountsEntity>(request));
-            return _mapper.Map<FinanceAccountsProtoDto>(financeAccountEntity);
+            var financeAccountDto = await _service.CreateAsync(_mapper.Map<FinanceAccountsCreateDto>(request));
+            return _mapper.Map<FinanceAccountsProtoDto>(financeAccountDto);
         }
 
         public override async Task<FinanceAccountsProtoDto> UpdateFinancAccounts(FinanceAccountsUpdateRequest request, ServerCallContext context)
         {
-            var financeAccountsRequest = _mapper.Map<FinanceAccountsEntity>(request);
-            var financeAccountsEntity = await _repository.UpdateAsync(financeAccountsRequest);
-            return _mapper.Map<FinanceAccountsProtoDto>(financeAccountsEntity);
+            var financeAccountsDto = await _service.UpdateAsync(_mapper.Map<FinanceAccountsUpdateDto>(request));
+            return _mapper.Map<FinanceAccountsProtoDto>(financeAccountsDto);
         }
 
         public override async Task<FinanceAccountsDeleteResponse> DeleteFinanceAccounts(FinanceAccountsSingleRequest request, ServerCallContext context)
         {
-            if(await _repository.DeleteAsync(Guid.Parse(request.Id))) 
+            if (await _service.DeleteAsync(Guid.Parse(request.Id)))
             {
                 return new FinanceAccountsDeleteResponse() { Result = SUCCESS };
             }

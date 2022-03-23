@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace Financial.Aplpication.Mapper.ConfigureAutoMapper.Interface
+namespace Financial.Domain.Mapper.Interface
 {
     public interface IMapperService
     {
