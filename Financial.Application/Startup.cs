@@ -38,9 +38,6 @@ namespace Financial.Application
             {
                 services.IncludeDataBase(DataBaseType.mySql, mySql);
             }
-
-            //services.AddDbContext<MyContext>(options => options.UseMySql(mySql, ServerVersion.Parse("5.7-mysql"),
-            //               options => options.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null)));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

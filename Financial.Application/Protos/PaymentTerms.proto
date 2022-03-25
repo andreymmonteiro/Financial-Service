@@ -1,3 +1,69 @@
 syntax = "proto3";
 
 option csharp_namespace = "Financial.Application.Protos";
+import "google/protobuf/timestamp.proto";
+
+package PaymentTerms;
+
+
+message PaymentTermsProtoDto{
+	string Id = 1;
+    string CompanyId = 2;
+    google.protobuf.Timestamp CreateAt = 3;
+	google.protobuf.Timestamp UpdateAt = 4;
+	string Description = 5;
+	int32 ForceExpiration = 6;
+	repeated PaymentTermsItemsRequest PaymentTermsItems = 7;
+}
+
+message PaymentTermsCreate{
+
+	string CompanyId = 1;
+    google.protobuf.Timestamp CreateAt = 2;
+	string Description = 3;
+	int32 ForceExpiration = 4;
+	repeated PaymentTermsItemsRequest PaymentTermsItems = 5;
+}
+
+message PaymentTermsUpdate{
+	string Id = 1;
+    string CompanyId = 2;
+	google.protobuf.Timestamp UpdateAt = 3;
+	string Description = 4;
+	int32 ForceExpiration = 5;
+	repeated PaymentTermsItemsRequest PaymentTermsItems = 6;
+}
+
+message PaymentTermsDelete{
+	string Id =1;
+}
+
+message PaymentTermsDeleteResponse{
+	string Result = 1;
+}
+
+message PaymentTermsRequest{
+
+}
+
+message PaymentTermsSingleRequest{
+	string id = 1;
+}
+
+message PaymentTermsItemsRequest{
+	string Id = 1;
+    string CompanyId = 2;
+    google.protobuf.Timestamp CreateAt = 3;
+	google.protobuf.Timestamp UpdateAt = 4;
+	int32 Days = 5;
+	double Addition = 6;
+	double Discount = 7;
+	string PaymentTermsId = 8;
+	PaymentTermsProtoDto PaymentTerms = 9;
+}
+
+service PaymentTermsProtoService{
+	
+	rpc GetAll(PaymentTermsRequest)returns(PaymentTermsProtoDto){};
+	rpc Get(PaymentTermsSingleRequest)returns(PaymentTermsProtoDto){};
+}

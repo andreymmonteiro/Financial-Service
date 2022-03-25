@@ -13,8 +13,11 @@ namespace Financial.Application.Mapper.ConfigureAutoMapper
 
         public IMapper GetMapper()
         {
-            var config = new AutoMapper.MapperConfiguration(mapper =>
-            mapper.AddProfile(new EntityToDto()));
+            var config = new AutoMapper.MapperConfiguration(mapper => 
+            {
+                mapper.AddProfile(new EntityToDto());
+                mapper.AddProfile(new ProtoToDto());
+            });
 
             return config.CreateMapper();
         }

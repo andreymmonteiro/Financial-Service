@@ -12,6 +12,7 @@ namespace Financial.CrossCutting.Solvers
         {
             service.AddSingleton<IMapperService, AutoMapperFixtureService>();
             service.AddScoped<IFinanceAccountsService, FinanceAccountsService>();
+            service.AddScoped<IPaymentTermsService, PaymentTermsService>();
         }
     }
 }

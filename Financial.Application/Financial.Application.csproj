@@ -7,10 +7,12 @@
 
   <ItemGroup>
     <None Remove="Protos\Financial.proto" />
+    <None Remove="Protos\PaymentTerms.proto" />
   </ItemGroup>
 
   <ItemGroup>
     <Protobuf Include="Protos\Financial.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos\PaymentTerms.proto" GrpcServices="Server" />
   </ItemGroup>
 
   <ItemGroup>

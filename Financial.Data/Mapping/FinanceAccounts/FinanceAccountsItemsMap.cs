@@ -11,9 +11,8 @@ namespace Financial.Data.Mapping.FinanceAccounts
         {
             builder.ToTable(TABLE);
             builder.HasKey(pk => pk.Id);
-            //builder.HasOne(fk => fk.FinanceAccount).WithMany(fk => fk.FinanceAccountsItems);
+            builder.HasOne(fk => fk.FinanceAccount).WithMany(fk => fk.FinanceAccountsItems);
             builder.HasIndex(index => index.CompanyId).IsUnique();
-            
         }
     }
 }

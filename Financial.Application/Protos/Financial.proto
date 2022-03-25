@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 option csharp_namespace = "Financial.Application.Protos";
+import "google/protobuf/timestamp.proto";
 
 package Financial;
 
@@ -18,10 +19,12 @@ message FinanceAccountsSingleRequest
 
 message FinanceAccountsCreateRequest
 {
-	string PaymentTermsId = 1;
-	string FinanceAccountItemId = 2;
-	int32 FinanceAccountType = 3;
-	string PersonId = 4;
+	string Id = 1;
+	string PaymentTermsId = 2;
+	string FinanceAccountItemId = 3;
+	int32 FinanceAccountType = 4;
+	string PersonId = 5;
+	repeated FinanceAccountsItemsRequest FinanceAccountsItems = 6;
 }
 message FinanceAccountsUpdateRequest
 {
@@ -33,6 +36,16 @@ message FinanceAccountsUpdateRequest
 
 message FinanceAccountsRequest{
 
+}
+
+message FinanceAccountsItemsRequest
+{
+	string CompanyId = 1;
+	double GrossTotal = 2;
+	double Total = 3;
+	double Discount = 4;
+	double Addition = 5;
+	google.protobuf.Timestamp DueDate = 6;
 }
 
 message FinanceAccountsDeleteResponse{
