@@ -3,6 +3,7 @@ using Financial.Application.Protos;
 using Financial.Domain.Dtos.FinanceAccounts;
 using Financial.Domain.Dtos.FinanceAccounts.Items;
 using Financial.Domain.Dtos.PaymentTerms;
+using System.Collections.Generic;
 
 namespace Financial.Application.Mapper
 {
@@ -19,6 +20,7 @@ namespace Financial.Application.Mapper
             CreateMap<FinanceAccountsCreateRequest, FinanceAccountsCreateDto>().ReverseMap();
             CreateMap<FinanceAccountsUpdateRequest, FinanceAccountsUpdateDto>().ReverseMap();
             CreateMap<FinanceAccountsProtoDto, FinanceAccountsDto>().ReverseMap();
+            CreateMap<ListFinanceAccountsProtoDto, IEnumerable<FinanceAccountsDto>>().ReverseMap();
             CreateMap<FinanceAccountsItemsRequest, FinanceAccountsItemsDto>().ReverseMap();
         }
 
@@ -27,6 +29,7 @@ namespace Financial.Application.Mapper
             CreateMap<PaymentTermsProtoDto, PaymentTermsDto>();
             CreateMap<PaymentTermsCreate, PaymentTermsCreateDto>();
             CreateMap<PaymentTermsUpdate, PaymentTermsUpdateDto>();
+            CreateMap<ListPaymentTermsProtoDto, IEnumerable<FinanceAccountsDto>>().ReverseMap();
             CreateMap<PaymentTermsItemsRequest, PaymentTermsItemsDto>();
         }
     }

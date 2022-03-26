@@ -5,28 +5,29 @@ using Financial.Domain.Dtos.FinanceAccounts;
 using Financial.Domain.Services;
 using Grpc.Core;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using static Financial.Application.Protos.Finance;
+using static Financial.Application.Protos.FinanceAccountsProtoService;
 
 namespace Financial.Application.Services
 {
-    public class FinancialService : FinanceBase
+    public class FinanceAccountsApplicationProtoService : FinanceAccountsProtoServiceBase
     {
         private readonly IFinanceAccountsService _service;
         private readonly IMapper _mapper;
         private const string SUCCESS = "Success";
         private const string ERROR = "Error";
 
-        public FinancialService(IFinanceAccountsService service, IMapperProtoService mapper)
+        public FinanceAccountsApplicationProtoService(IFinanceAccountsService service, IMapperProtoService mapper)
         {
             _service = service;
             _mapper = mapper.GetMapper();
         }
 
-        public override async Task<FinanceAccountsProtoDto> GetAllFinanceAccounts(FinanceAccountsRequest request, ServerCallContext context)
+        public override async Task<ListFinanceAccountsProtoDto> GetAllFinanceAccounts(FinanceAccountsRequest request, ServerCallContext context)
         {
             var financeAccountsEntity = await _service.GetAllAsync();
-            return _mapper.Map<FinanceAccountsProtoDto>(financeAccountsEntity);
+            return _mapper.Map<ListFinanceAccountsProtoDto>(financeAccountsEntity);
         }
 
         public override async Task<FinanceAccountsProtoDto> GetFinanceAccounts(FinanceAccountsSingleRequest request, ServerCallContext context)
@@ -41,7 +42,7 @@ namespace Financial.Application.Services
             return _mapper.Map<FinanceAccountsProtoDto>(financeAccountDto);
         }
 
-        public override async Task<FinanceAccountsProtoDto> UpdateFinancAccounts(FinanceAccountsUpdateRequest request, ServerCallContext context)
+        public override async Task<FinanceAccountsProtoDto> UpdateFinanceAccounts(FinanceAccountsUpdateRequest request, ServerCallContext context)
         {
             var financeAccountsDto = await _service.UpdateAsync(_mapper.Map<FinanceAccountsUpdateDto>(request));
             return _mapper.Map<FinanceAccountsProtoDto>(financeAccountsDto);

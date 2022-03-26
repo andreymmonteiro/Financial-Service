@@ -5,6 +5,9 @@ import "google/protobuf/timestamp.proto";
 
 package PaymentTerms;
 
+message ListPaymentTermsProtoDto{
+	repeated PaymentTermsProtoDto PaymentTermsProtoDto = 1;
+}
 
 message PaymentTermsProtoDto{
 	string Id = 1;
@@ -64,6 +67,6 @@ message PaymentTermsItemsRequest{
 
 service PaymentTermsProtoService{
 	
-	rpc GetAll(PaymentTermsRequest)returns(PaymentTermsProtoDto){};
+	rpc GetAll(PaymentTermsRequest)returns(ListPaymentTermsProtoDto){};
 	rpc Get(PaymentTermsSingleRequest)returns(PaymentTermsProtoDto){};
 }

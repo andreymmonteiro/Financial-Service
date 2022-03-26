@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Financial.Data.Repositories
 {
-    public sealed class BaseRepository<T> : IRepository<T> where T : BaseEntity
+    public class BaseRepository<T> : IRepository<T> where T : BaseEntity
     {
         private readonly MyContext _context;
         private readonly DbSet<T> _dbSet;
@@ -24,7 +24,7 @@ namespace Financial.Data.Repositories
         {
             var entity = await _dbSet.FirstOrDefaultAsync(first => first.Id.Equals(id));
             var result = _dbSet.Remove(entity);
-            return await _context.SaveChangesAsync() > 0;
+            return await _context.SaveChangesAsync() > ZERO;
 
         }
 
@@ -51,7 +51,7 @@ namespace Financial.Data.Repositories
         public async Task<T> UpdateAsync(T entity)
         {
             var oldEntity = await _dbSet.AsNoTracking().FirstOrDefaultAsync(first => first.Id.Equals(entity.Id));
-            if(!(oldEntity is null)) 
+            if(oldEntity is not null)
             {
                 entity.UpdateAt = DateTime.Now;
                 _context.Update<T>(entity);

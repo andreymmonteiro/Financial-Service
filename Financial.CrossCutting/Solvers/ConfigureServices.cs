@@ -1,4 +1,6 @@
-﻿using Financial.Domain.Mapper.Interface;
+﻿using Financial.Data.Implementations;
+using Financial.Data.Repositories;
+using Financial.Domain.Mapper.Interface;
 using Financial.Domain.Services;
 using Financial.Service;
 using Financial.Service.AutoMapperConfigure;
@@ -13,6 +15,8 @@ namespace Financial.CrossCutting.Solvers
             service.AddSingleton<IMapperService, AutoMapperFixtureService>();
             service.AddScoped<IFinanceAccountsService, FinanceAccountsService>();
             service.AddScoped<IPaymentTermsService, PaymentTermsService>();
+            service.AddScoped<IPaymentTermsItemsService, PaymentTermsItemsService>();
+            service.AddScoped<IPaymentTermsImplementations, PaymentTermsImplementations>();
         }
     }
 }

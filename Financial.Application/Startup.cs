@@ -51,7 +51,7 @@ namespace Financial.Application
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGrpcService<FinancialService>();
+                endpoints.MapGrpcService<FinanceAccountsApplicationProtoService>();
 
                 endpoints.MapGet("/", async context =>
                 {
