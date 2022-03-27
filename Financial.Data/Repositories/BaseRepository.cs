@@ -30,11 +30,18 @@ namespace Financial.Data.Repositories
 
         public async Task<T> InsertASync(T entity)
         {
-            _dbSet.Add(entity);
-            if(await _context.SaveChangesAsync() > ZERO) 
+            try
             {
-                return entity;
+                _dbSet.Add(entity);
+                if (await _context.SaveChangesAsync() > ZERO)
+                {
+                    return entity;
+                }
+            }catch(Exception e)
+            {
+
             }
+            
             return null;
         }
 
@@ -50,7 +57,7 @@ namespace Financial.Data.Repositories
 
         public async Task<T> UpdateAsync(T entity)
         {
-            var oldEntity = await _dbSet.AsNoTracking().FirstOrDefaultAsync(first => first.Id.Equals(entity.Id));
+            var oldEntity = await _dbSet.FirstOrDefaultAsync(first => first.Id.Equals(entity.Id));
             if(oldEntity is not null)
             {
                 entity.UpdateAt = DateTime.Now;

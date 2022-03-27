@@ -1,7 +1,6 @@
 syntax = "proto3";
 
 option csharp_namespace = "Financial.Application.Protos";
-import "google/protobuf/timestamp.proto";
 
 package PaymentTerms;
 
@@ -12,8 +11,8 @@ message ListPaymentTermsProtoDto{
 message PaymentTermsProtoDto{
 	string Id = 1;
     string CompanyId = 2;
-    google.protobuf.Timestamp CreateAt = 3;
-	google.protobuf.Timestamp UpdateAt = 4;
+    string CreateAt = 3;
+	string UpdateAt = 4;
 	string Description = 5;
 	int32 ForceExpiration = 6;
 	repeated PaymentTermsItemsRequest PaymentTermsItems = 7;
@@ -22,19 +21,17 @@ message PaymentTermsProtoDto{
 message PaymentTermsCreate{
 
 	string CompanyId = 1;
-    google.protobuf.Timestamp CreateAt = 2;
-	string Description = 3;
-	int32 ForceExpiration = 4;
-	repeated PaymentTermsItemsRequest PaymentTermsItems = 5;
+	string Description = 2;
+	int32 ForceExpiration = 3;
+	repeated PaymentTermsItemsRequest PaymentTermsItems = 4;
 }
 
 message PaymentTermsUpdate{
 	string Id = 1;
     string CompanyId = 2;
-	google.protobuf.Timestamp UpdateAt = 3;
-	string Description = 4;
-	int32 ForceExpiration = 5;
-	repeated PaymentTermsItemsRequest PaymentTermsItems = 6;
+	string Description = 3;
+	int32 ForceExpiration = 4;
+	repeated PaymentTermsItemsRequest PaymentTermsItems = 5;
 }
 
 message PaymentTermsDelete{
@@ -56,8 +53,8 @@ message PaymentTermsSingleRequest{
 message PaymentTermsItemsRequest{
 	string Id = 1;
     string CompanyId = 2;
-    google.protobuf.Timestamp CreateAt = 3;
-	google.protobuf.Timestamp UpdateAt = 4;
+    string CreateAt = 3;
+	string UpdateAt = 4;
 	int32 Days = 5;
 	double Addition = 6;
 	double Discount = 7;
@@ -69,4 +66,7 @@ service PaymentTermsProtoService{
 	
 	rpc GetAll(PaymentTermsRequest)returns(ListPaymentTermsProtoDto){};
 	rpc Get(PaymentTermsSingleRequest)returns(PaymentTermsProtoDto){};
+	rpc Create(PaymentTermsCreate)returns(PaymentTermsProtoDto){};
+	rpc Update(PaymentTermsUpdate)returns(PaymentTermsProtoDto){};
+	rpc Delete(PaymentTermsSingleRequest)returns(PaymentTermsDeleteResponse);
 }

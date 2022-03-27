@@ -3,14 +3,16 @@ using System;
 using Financial.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Financial.Data.Migrations
 {
     [DbContext(typeof(MyContext))]
-    partial class MyContextModelSnapshot : ModelSnapshot
+    [Migration("20220326235447_sql")]
+    partial class sql
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -126,9 +128,6 @@ namespace Financial.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<bool>("Active")
-                        .HasColumnType("tinyint(1)");
-
                     b.Property<Guid>("CompanyId")
                         .HasColumnType("char(36)");
 
@@ -153,23 +152,21 @@ namespace Financial.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("5edc90a6-35d2-4ddb-885c-aa4f4f831461"),
-                            Active = false,
-                            CompanyId = new Guid("3221e506-cc9b-4d50-850f-66c4199fc860"),
-                            CreateAt = new DateTime(2022, 3, 26, 22, 0, 32, 539, DateTimeKind.Local).AddTicks(3114),
+                            Id = new Guid("ff14ec43-a5c0-490d-ae85-0657302d0740"),
+                            CompanyId = new Guid("a9b1d8b5-59d5-40f2-bdd4-78aad9cae45c"),
+                            CreateAt = new DateTime(2022, 3, 26, 20, 54, 47, 97, DateTimeKind.Local).AddTicks(322),
                             Description = "Á vista",
                             ForceExpiration = 0,
-                            UpdateAt = new DateTime(2022, 3, 26, 22, 0, 32, 540, DateTimeKind.Local).AddTicks(7082)
+                            UpdateAt = new DateTime(2022, 3, 26, 20, 54, 47, 98, DateTimeKind.Local).AddTicks(3856)
                         },
                         new
                         {
-                            Id = new Guid("d0671a2b-f1b5-4f7a-ae3b-ec4ddc7efba9"),
-                            Active = false,
-                            CompanyId = new Guid("3221e506-cc9b-4d50-850f-66c4199fc860"),
-                            CreateAt = new DateTime(2022, 3, 26, 22, 0, 32, 541, DateTimeKind.Local).AddTicks(7104),
+                            Id = new Guid("fbb6cfde-770e-4013-80ef-a6eea5b0bbe7"),
+                            CompanyId = new Guid("a9b1d8b5-59d5-40f2-bdd4-78aad9cae45c"),
+                            CreateAt = new DateTime(2022, 3, 26, 20, 54, 47, 99, DateTimeKind.Local).AddTicks(3830),
                             Description = "30 dias",
                             ForceExpiration = 0,
-                            UpdateAt = new DateTime(2022, 3, 26, 22, 0, 32, 541, DateTimeKind.Local).AddTicks(7111)
+                            UpdateAt = new DateTime(2022, 3, 26, 20, 54, 47, 99, DateTimeKind.Local).AddTicks(3838)
                         });
                 });
 
@@ -210,14 +207,14 @@ namespace Financial.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("29db9e49-e95c-4560-9c5d-14fb0ecdbf4c"),
+                            Id = new Guid("3ba4ab5c-491f-4351-a40b-44b500f84f58"),
                             Addition = 0m,
-                            CompanyId = new Guid("3221e506-cc9b-4d50-850f-66c4199fc860"),
-                            CreateAt = new DateTime(2022, 3, 26, 22, 0, 32, 541, DateTimeKind.Local).AddTicks(7680),
+                            CompanyId = new Guid("a9b1d8b5-59d5-40f2-bdd4-78aad9cae45c"),
+                            CreateAt = new DateTime(2022, 3, 26, 20, 54, 47, 99, DateTimeKind.Local).AddTicks(4464),
                             Days = 30,
                             Discount = 0m,
-                            PaymentTermsId = new Guid("d0671a2b-f1b5-4f7a-ae3b-ec4ddc7efba9"),
-                            UpdateAt = new DateTime(2022, 3, 26, 22, 0, 32, 541, DateTimeKind.Local).AddTicks(7684)
+                            PaymentTermsId = new Guid("fbb6cfde-770e-4013-80ef-a6eea5b0bbe7"),
+                            UpdateAt = new DateTime(2022, 3, 26, 20, 54, 47, 99, DateTimeKind.Local).AddTicks(4469)
                         });
                 });
 
